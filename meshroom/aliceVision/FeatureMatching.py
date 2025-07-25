@@ -8,7 +8,7 @@ class FeatureMatching(desc.AVCommandLineNode):
     commandLine = "aliceVision_featureMatching {allParams}"
     size = desc.DynamicNodeSize("input")
     parallelization = desc.Parallelization(blockSize=20)
-    commandLineRange = "--rangeStart {rangeStart} --rangeSize {rangeBlockSize}"
+    commandLineRange = "--rangeIteration {rangeIteration} --rangeBlocksCount {rangeBlocksCount}"
 
     category = "Sparse Reconstruction"
     documentation = """

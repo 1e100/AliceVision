@@ -13,22 +13,22 @@
 namespace aliceVision {
 namespace matchingImageCollection {
 
-/// Load a set of PairSet from a stream
-/// I J K L (pair that link I)
-bool loadPairs(std::istream& stream, PairSet& pairs, int rangeStart = -1, int rangeSize = 0);
+/**
+ * @Brief load pairs from file
+ * File format is reference matchImg1 matchImage2 ...\n
+ * @param sFileName input file path to load
+ * @param pairs the output set of pairs
+ * @return false if a problem is detected in the file
+*/
+bool loadPairsFromFile(const std::string& sFileName, PairSet& pairs);
 
-/// Save a set of PairSet to a stream (one pair per line)
-/// I J
-/// I K
-void savePairs(std::ostream& stream, const PairSet& pairs);
-
-/// Same as loadPairs, but loads from a given file
-bool loadPairsFromFile(const std::string& sFileName,  // filename of the list file,
-                       PairSet& pairs,
-                       int rangeStart = -1,
-                       int rangeSize = 0);
-
-/// Same as savePairs, but saves to a given file
+/**
+ * @Brief Save pairs to file
+ * File format is reference matchImg1 matchImage2 ...\n
+ * @param sFileName input file path to save
+ * @param pairs the input set of pairs
+ * @return false if a problem is detected in the file
+*/
 bool savePairsToFile(const std::string& sFileName, const PairSet& pairs);
 
 }  // namespace matchingImageCollection
