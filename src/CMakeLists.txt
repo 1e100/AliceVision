@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.30)
 message("CMake version: ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}")
 
 # ==============================================================================
@@ -253,6 +253,7 @@ endif()
 if (ALICEVISION_USE_OPENMP STREQUAL "OFF")
     set(ALICEVISION_HAVE_OPENMP 0)
 else() # ON OR AUTO
+    set(OpenMP_RUNTIME_MSVC "llvm")
     find_package(OpenMP)
 
     if (OPENMP_FOUND)
