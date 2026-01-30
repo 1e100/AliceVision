@@ -734,6 +734,9 @@ if (ALICEVISION_HAVE_CUDA)
     set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS};-gencode;arch=compute_${ALICEVISION_CUDA_CC_LIST_LAST},code=compute_${ALICEVISION_CUDA_CC_LIST_LAST}")
 
     set(CUDA_NVCC_FLAGS         "${CUDA_NVCC_FLAGS};-std=c++20")
+    include(cmake/CudaAmxWorkaround.cmake)
+    av_get_cuda_amx_workaround_flags(AV_CUDA_AMX_WORKAROUND_FLAGS)
+    list(APPEND CUDA_NVCC_FLAGS ${AV_CUDA_AMX_WORKAROUND_FLAGS})
 
     # default stream legacy implies that the 0 stream synchronizes all streams
     set(CUDA_NVCC_FLAGS         "${CUDA_NVCC_FLAGS};--default-stream;legacy")
