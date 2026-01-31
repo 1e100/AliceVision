@@ -29,6 +29,8 @@ for pkg in \
   libtiff-dev \
   libpng-dev \
   libgmp-dev \
+  libeigen3-dev \
+  libxerces-c-dev \
   libflann-dev; do
   if ! dpkg -s "$pkg" >/dev/null 2>&1; then
     missing_pkgs+=("$pkg")
