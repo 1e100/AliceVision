@@ -26,21 +26,6 @@ for pkg in \
   libexpat1-dev \
   libopenimageio-dev \
   openimageio-tools \
-  libboost-atomic-dev \
-  libboost-container-dev \
-  libboost-date-time-dev \
-  libboost-graph-dev \
-  libboost-json-dev \
-  libboost-log-dev \
-  libboost-math-dev \
-  libboost-program-options-dev \
-  libboost-regex-dev \
-  libboost-serialization-dev \
-  libboost-stacktrace-dev \
-  libboost-system-dev \
-  libboost-thread-dev \
-  libboost-timer-dev \
-  libboost-test-dev \
   libtiff-dev \
   libpng-dev \
   libgmp-dev \
@@ -83,6 +68,7 @@ export CUDAHOSTCXX=/usr/bin/g++-12
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX="$PWD/build/install" \
   -DALICEVISION_BUILD_DEPENDENCIES=ON \
+  -DAV_BUILD_DEPENDENCIES_PARALLEL=0 \
   -DAV_USE_CUDA=ON \
   -DALICEVISION_CUDA_CC_LIST="86;120" \
   -DAV_BUILD_OPENCV=OFF \
@@ -91,7 +77,7 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
   -DAV_BUILD_PNG=OFF \
   -DAV_BUILD_JPEG=OFF \
   -DAV_BUILD_ZLIB=OFF \
-  -DAV_BUILD_BOOST=OFF \
+  -DAV_BUILD_BOOST=ON \
   -DAV_BUILD_EXPAT=OFF \
   -DAV_BUILD_OPENEXR=OFF \
   -DAV_BUILD_OPENIMAGEIO=OFF \
@@ -100,7 +86,7 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
   -DOpenCV_DIR=/usr/lib/x86_64-linux-gnu/cmake/opencv4 \
   -DAV_BUILD_FFMPEG=OFF \
   -DFFMPEG_ROOT=/usr \
-  -DAV_BUILD_SWIG=OFF \
+  -DAV_BUILD_SWIG=ON \
   -DAV_USE_SWIG=ON \
   -DAV_BUILD_E57FORMAT=ON \
   -DAV_BUILD_LAPACK=OFF \
@@ -111,4 +97,4 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_PREFIX_PATH=/usr \
   -DBOOST_ROOT=/usr
 
-cmake --build build -j 2>&1 | tee /tmp/av-build.log
+cmake --build build -j "$(nproc)" 2>&1 | tee /tmp/av-build.log
